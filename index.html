@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 MSBA Sports Data Analytics Competition | USC Marshall</title>
+  <meta name="description" content="The inaugural 2027 MSBA Sports Data Analytics Competition, hosted by the USC Marshall School of Business. A national, fully virtual competition for graduate analytics teams building live in-game decision tools for basketball.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta property="og:title" content="2027 MSBA Sports Data Analytics Competition">
+  <meta property="og:description" content="A national, fully virtual basketball analytics competition for graduate students, hosted by USC Marshall. Live finals broadcast February 20, 2027.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root {
+      --cardinal: #990000;
+      --cardinal-dark: #730000;
+      --cardinal-deep: #4a0000;
+      --gold: #FFC72C;
+      --gold-light: #FFF4D4;
+      --ink: #1A1A1A;
+      --muted: #555;
+      --line: #E2E8F0;
+      --bg: #F8F9FA;
+      --white: #fff;
+      --radius: 14px;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink); background: var(--white); line-height: 1.6; font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--cardinal); }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav::before { content: ""; display: block; height: 4px; background: linear-gradient(90deg, var(--cardinal), var(--gold)); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--cardinal); font-weight: 800; letter-spacing: -.2px; white-space: nowrap; }
+    .brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .nav ul { display: flex; list-style: none; gap: 4px; }
+    .nav ul a { text-decoration: none; color: #333; font-size: 14.5px; font-weight: 600; padding: 8px 10px; border-radius: 8px; }
+    .nav ul a:hover { background: var(--gold-light); color: var(--cardinal); }
+    .menu-btn { display: none; background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 15px; font-weight: 600; cursor: pointer; color: var(--cardinal); }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(ellipse at 85% 10%, rgba(255,199,44,.22), transparent 55%),
+        linear-gradient(135deg, var(--cardinal-deep) 0%, var(--cardinal) 60%, var(--cardinal-dark) 100%);
+      color: #fff; padding: 72px 0 80px; position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
+      background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    .hero .wrap { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; position: relative; z-index: 1; }
+    .eyebrow { display: inline-block; font-size: 12.5px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--cardinal); background: var(--gold); padding: 5px 12px; border-radius: 99px; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(34px, 5vw, 54px); line-height: 1.08; letter-spacing: -1.2px; font-weight: 850; margin-bottom: 16px; }
+    .hero h1 span { color: var(--gold); }
+    .hero .lead { font-size: 19px; max-width: 600px; opacity: .95; margin-bottom: 26px; }
+    .hero .org { font-size: 14.5px; opacity: .85; margin-bottom: 30px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; font-size: 16px; padding: 13px 22px; border-radius: 10px; border: 2px solid transparent; transition: transform .15s, box-shadow .15s; cursor: pointer; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-gold { background: var(--gold); color: var(--cardinal-deep); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+    .btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); }
+    .btn[aria-disabled="true"] { opacity: .75; cursor: default; transform: none; }
+    .hero-logo { width: 100%; height: auto; aspect-ratio: 1 / 1; max-width: 380px; justify-self: center; background: #fff; border-radius: 22px; padding: 10px; box-shadow: 0 24px 60px rgba(0,0,0,.35); border: 3px solid var(--gold); }
+
+    /* Countdown strip */
+    .countdown { background: var(--ink); color: #fff; }
+    .countdown .wrap { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; padding: 16px 24px; text-align: center; }
+    .countdown .label { font-size: 14px; letter-spacing: .5px; opacity: .85; }
+    .countdown .label strong { color: var(--gold); }
+    .cd-units { display: flex; gap: 10px; }
+    .cd-unit { min-width: 62px; background: rgba(255,255,255,.08); border-radius: 8px; padding: 4px 8px; }
+    .cd-unit b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; color: var(--gold); line-height: 1.2; }
+    .cd-unit small { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: .75; }
+
+    /* Sections */
+    section { padding: 80px 0; }
+    section.alt { background: var(--bg); }
+    .section-head { max-width: 760px; margin-bottom: 40px; }
+    .kicker { font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cardinal); margin-bottom: 8px; }
+    h2 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -.7px; font-weight: 800; margin-bottom: 14px; }
+    h3 { font-size: 19px; line-height: 1.3; margin-bottom: 8px; }
+    .section-head p { color: var(--muted); font-size: 18px; }
+
+    /* Snapshot */
+    .snapshot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -48px; position: relative; z-index: 2; }
+    .snap { background: #fff; border-radius: var(--radius); padding: 20px; border: 1px solid var(--line); border-top: 4px solid var(--cardinal); box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    .snap:nth-child(4) { border-top-color: var(--gold); }
+    .snap .ico { font-size: 22px; }
+    .snap .what { font-size: 12.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin: 6px 0 4px; }
+    .snap .when { font-size: 18px; font-weight: 800; color: var(--cardinal); line-height: 1.25; }
+    .snap .note { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+    #snapshot-section { padding-top: 0; }
+
+    /* Cards & grids */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .card p, .card li { color: #333; font-size: 16px; }
+    .card .num { display: inline-flex; width: 34px; height: 34px; border-radius: 50%; align-items: center; justify-content: center; background: var(--gold-light); color: var(--cardinal); font-weight: 800; margin-bottom: 12px; border: 1px solid rgba(255,199,44,.6); }
+    .card.accent { border-left: 5px solid var(--cardinal); }
+    ul.ticks { list-style: none; }
+    ul.ticks li { padding-left: 28px; position: relative; margin-bottom: 10px; }
+    ul.ticks li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--cardinal); font-weight: 900; }
+
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: start; }
+    .about-grid p { margin-bottom: 16px; color: #333; }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fact { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+    .fact b { display: block; font-size: 28px; color: var(--cardinal); line-height: 1.1; letter-spacing: -.5px; }
+    .fact span { font-size: 14px; color: var(--muted); }
+
+    .prompt-box { background: linear-gradient(135deg, var(--cardinal), var(--cardinal-dark)); color: #fff; border-radius: 18px; padding: 34px 38px; margin-bottom: 30px; box-shadow: 0 14px 40px rgba(153,0,0,.25); }
+    .prompt-box .kicker { color: var(--gold); }
+    .prompt-box blockquote { font-size: clamp(21px, 2.4vw, 27px); font-weight: 750; line-height: 1.35; letter-spacing: -.3px; }
+    .prompt-box p { margin-top: 14px; opacity: .9; }
+
+    /* Judging */
+    .criteria { display: grid; gap: 14px; }
+    .crit { display: grid; grid-template-columns: 220px 1fr 60px; gap: 18px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; }
+    .crit h3 { margin: 0; font-size: 17px; }
+    .crit p { font-size: 14.5px; color: var(--muted); margin-top: 8px; grid-column: 1 / -1; }
+    .bar { height: 12px; background: #EEF1F5; border-radius: 99px; overflow: hidden; }
+    .bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--cardinal), var(--gold)); border-radius: 99px; }
+    .crit .pct { font-weight: 850; font-size: 20px; color: var(--cardinal); text-align: right; }
+
+    /* Timeline */
+    .timeline { list-style: none; position: relative; max-width: 860px; }
+    .timeline::before { content: ""; position: absolute; left: 15px; top: 6px; bottom: 6px; width: 3px; background: linear-gradient(var(--cardinal), var(--gold)); border-radius: 3px; }
+    .tl { position: relative; padding: 0 0 26px 52px; }
+    .tl::before { content: ""; position: absolute; left: 7px; top: 5px; width: 19px; height: 19px; border-radius: 50%; background: #fff; border: 4px solid var(--cardinal); }
+    .tl.key::before { background: var(--gold); border-color: var(--cardinal); }
+    .tl.past { opacity: .55; }
+    .tl.past::before { background: var(--cardinal); }
+    .tl.next .tl-date::after { content: "UP NEXT"; margin-left: 10px; font-size: 11px; letter-spacing: 1px; background: var(--gold); color: var(--cardinal-deep); padding: 2px 8px; border-radius: 99px; vertical-align: 2px; }
+    .tl-date { font-size: 13.5px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--cardinal); }
+    .tl h3 { margin: 2px 0 2px; }
+    .tl p { color: var(--muted); font-size: 15.5px; }
+
+    /* Rules */
+    .rule-tag { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #fff; background: var(--cardinal); padding: 3px 9px; border-radius: 6px; margin-bottom: 10px; }
+    table.penalty { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 15px; }
+    table.penalty td { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    table.penalty td:last-child { text-align: right; font-weight: 700; color: var(--cardinal); }
+
+    /* Join */
+    .join { background: linear-gradient(135deg, var(--cardinal-deep), var(--cardinal)); color: #fff; text-align: center; }
+    .join h2 { color: #fff; }
+    .join p { max-width: 680px; margin: 0 auto 26px; opacity: .92; font-size: 18px; }
+    .join .cta-row { justify-content: center; }
+    .join .fine { font-size: 15px; margin-top: 26px; opacity: .85; }
+
+    footer { background: #111; color: #bbb; padding: 30px 0; font-size: 14px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: var(--gold); }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero .wrap, .about-grid { grid-template-columns: 1fr; }
+      .hero-logo { max-width: 260px; justify-self: start; }
+      .snapshot { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 860px) {
+      .menu-btn { display: block; }
+      .nav ul { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 8px 16px 16px; border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,.08); }
+      .nav ul.open { display: flex; }
+      .nav ul a { display: block; padding: 12px 10px; font-size: 16px; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      section { padding: 60px 0; }
+      .hero { padding: 48px 0 72px; }
+      .hero-logo { display: none; }
+      .snapshot, .grid-3, .grid-2, .facts { grid-template-columns: 1fr; }
+      .crit { grid-template-columns: 1fr 52px; }
+      .crit .bar { grid-column: 1 / -1; grid-row: 2; }
+      .prompt-box { padding: 26px 22px; }
+      .brand .long { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="brand" href="#top"><img src="assets/favicon.png" alt=""><span><span class="long">MSBA </span>Sports Analytics 2027</span></a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#challenge">Challenge</a></li>
+        <li><a href="#judging">Judging</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#rules">Rules</a></li>
+        <li><a href="#join">Participate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Inaugural · 2027 · 100% Virtual</span>
+        <h1>MSBA Sports Data Analytics <span>Competition</span></h1>
+        <p class="lead">A national competition for graduate analytics talent. Teams turn live NBA game data into an interactive tool that helps coaches and executives make better decisions during the game.</p>
+        <p class="org">Organized by the University of Southern California, Marshall School of Business · Supported by the MS in Business Analytics (MSBA) Program</p>
+        <div class="cta-row">
+          <a class="btn btn-gold interest-link" href="#join">Express Interest →</a>
+          <a class="btn btn-ghost" href="#challenge">See the Challenge</a>
+        </div>
+      </div>
+      <img class="hero-logo" src="assets/logo.jpg" alt="USC Marshall Basketball Analytics Competition emblem" width="640" height="640">
+    </div>
+  </header>
+
+  <div class="countdown" id="countdown" hidden>
+    <div class="wrap">
+      <div class="label">Next milestone: <strong id="cd-name"></strong> · <span id="cd-date"></span></div>
+      <div class="cd-units" aria-live="off">
+        <div class="cd-unit"><b id="cd-d">0</b><small>Days</small></div>
+        <div class="cd-unit"><b id="cd-h">0</b><small>Hours</small></div>
+        <div class="cd-unit"><b id="cd-m">0</b><small>Mins</small></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="snapshot-section" aria-label="Key dates">
+    <div class="wrap">
+      <div class="snapshot" style="margin-top:32px">
+        <div class="snap"><div class="ico">🔒</div><div class="what">Team Registration Deadline</div><div class="when">Wed, Jan 13, 2027</div><div class="note">School &amp; team roster lock</div></div>
+        <div class="snap"><div class="ico">📊</div><div class="what">Kickoff &amp; Case Launch</div><div class="when">Mon, Jan 25, 2027</div><div class="note">Case &amp; dataset release</div></div>
+        <div class="snap"><div class="ico">🚨</div><div class="what">Case Submission Deadline</div><div class="when">Sun, Feb 7, 2027</div><div class="note">11:59 PM PST · GitHub lock</div></div>
+        <div class="snap"><div class="ico">🏆</div><div class="what">Live Finals Broadcast</div><div class="when">Sat, Feb 20, 2027</div><div class="note">9:00–11:00 AM PST · Zoom &amp; YouTube</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="kicker">About the Competition</div>
+        <h2>Where academic analytics meets the NBA bench</h2>
+        <p>The USC Marshall School of Business is proud to host the inaugural <strong>2027 MSBA Sports Data Analytics Competition</strong>. This national event brings together top quantitative graduate talent for a sports analytics competition focused on basketball and live in-game data from the NBA.</p>
+        <p>Our goal is to bridge academic excellence with elite front-office and coaching decision-making, connecting the nation's leading analytical talent with active sports executives on a globally broadcast platform.</p>
+        <p>Los Angeles is a global sports hub, home to 12 major professional teams across the NBA, WNBA, MLB, NFL, MLS, NWSL and NHL, along with top collegiate programs at USC and UCLA. That makes Southern California a natural home for sports analytics innovation.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><b>4–5</b><span>graduate students per team</span></div>
+        <div class="fact"><b>2</b><span>teams max per institution</span></div>
+        <div class="fact"><b>$0</b><span>cost to participate</span></div>
+        <div class="fact"><b>100%</b><span>virtual, no travel required</span></div>
+        <div class="fact"><b>2 wks</b><span>build sprint, Jan 25 – Feb 7</span></div>
+        <div class="fact"><b>Live</b><span>finals on Zoom &amp; YouTube</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">The Challenge</div>
+        <h2>One live tool. One in-game decision.</h2>
+        <p>The prompt is deliberately open-ended. Coaches and executives work under intense time pressure, so the deliverable is not a slide deck or a report. It is a single live dashboard or interactive visual that someone on the bench can understand at a glance.</p>
+      </div>
+
+      <div class="prompt-box">
+        <div class="kicker">The Official Prompt</div>
+        <blockquote>Create an analytics solution (live dashboard or graphic) that can help coaches or basketball executives make actionable decisions during a game.</blockquote>
+        <p>The full case prompt and the competition dataset are released at the virtual kickoff on January 25, 2027.</p>
+      </div>
+
+      <h3 style="margin-bottom:16px">Example problems teams could tackle</h3>
+      <div class="grid-3">
+        <div class="card"><div class="num">1</div><h3>Player Decision Quality</h3><p>How well are players making decisions at any point in a game, and what separates a high-quality decision from a low-quality one in that context?</p></div>
+        <div class="card"><div class="num">2</div><h3>Substitution &amp; Fatigue</h3><p>How well are the players on the court performing, and when is the best moment to sub them out before efficiency, defense or shooting drops off?</p></div>
+        <div class="card"><div class="num">3</div><h3>Foul Risk &amp; Lineups</h3><p>How likely are active players to commit a foul given the matchup, pace, court location and time remaining, and how should that shape rotations?</p></div>
+      </div>
+      <p style="margin-top:18px;color:var(--muted)">Teams may choose any other impactful in-game problem, as long as it turns data into a coachable, real-time action.</p>
+
+      <h3 style="margin:48px 0 16px">What teams submit</h3>
+      <div class="grid-2">
+        <div class="card accent">
+          <h3>A · Live interactive tool</h3>
+          <ul class="ticks">
+            <li>A live, running demo hosted on GitHub (for example GitHub Pages or a GitHub-deployed web app)</li>
+            <li>Understandable in seconds: low cognitive load, no ambiguous jargon</li>
+            <li>Lets judges pick a specific game, time or situation to see the analytics in context</li>
+            <li>A single, cohesive view rather than a collection of unrelated charts</li>
+            <li>Uses only the competition dataset provided</li>
+          </ul>
+        </div>
+        <div class="card accent">
+          <h3>B · Reproducible GitHub repository</h3>
+          <ul class="ticks">
+            <li>Clean, documented code (Python, R, JavaScript, etc.) covering ingestion through visualization</li>
+            <li>A README with the live demo URL, the coaching problem, methodology and data definitions</li>
+            <li>Reproduction instructions and a dependency file (requirements.txt, environment.yml, package.json or Dockerfile)</li>
+            <li>Disclosure of any AI tools used and how they helped</li>
+            <li>Timestamped commits throughout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="judging">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Evaluation</div>
+        <h2>How submissions are judged</h2>
+        <p>A distinguished panel of faculty, sports analytics professionals and industry leaders scores every submission on four criteria.</p>
+      </div>
+      <div class="criteria">
+        <div class="crit"><h3>Actionability</h3><div class="bar"><i style="width:35%"></i></div><div class="pct">35%</div><p>Does the tool recommend or clearly enable a specific tactical move, such as calling a timeout, making a substitution, shifting defensive coverage or changing shot selection?</p></div>
+        <div class="crit"><h3>Clarity of Visual</h3><div class="bar"><i style="width:30%"></i></div><div class="pct">30%</div><p>Can a coach or executive grasp the core takeaway within seconds? Is the design clean, intuitive and disciplined?</p></div>
+        <div class="crit"><h3>Feasibility</h3><div class="bar"><i style="width:20%"></i></div><div class="pct">20%</div><p>Could this decision realistically be carried out during a live, fast-paced game?</p></div>
+        <div class="crit"><h3>Technical Rigor &amp; Defense</h3><div class="bar"><i style="width:15%"></i></div><div class="pct">15%</div><p>How well engineered is the code, how sound is the underlying logic, and how convincingly can the team explain and defend it to the judges?</p></div>
+      </div>
+
+      <div class="card" style="margin-top:28px;background:var(--gold-light);border-color:rgba(255,199,44,.6)">
+        <h3>🤖 AI tools are allowed and encouraged</h3>
+        <p>Teams may use modern AI tools, including LLMs, coding assistants and design tools, to build and refine their solutions. Judging focuses on the quality and clarity of the tool you create and your ability to explain, justify and defend your design and analytical choices. AI speeds up the work; it doesn't replace sound strategic and statistical reasoning.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Key Dates</div>
+        <h2>Competition timeline</h2>
+        <p>All times are Pacific. The build window is a focused two-week sprint from case release to submission.</p>
+      </div>
+      <ol class="timeline" id="timeline-list">
+        <li class="tl" data-date="2026-11-02T00:00:00-08:00"><div class="tl-date">Week of Nov 2, 2026</div><h3>Competition announced</h3><p>Expression of interest opens for invited institutions.</p></li>
+        <li class="tl key" data-date="2027-01-13T23:59:00-08:00"><div class="tl-date">Wed, Jan 13, 2027 · 11:59 PM</div><h3>School registration &amp; roster lock</h3><p>Schools confirm participation and submit locked rosters (1–2 teams of 4–5 students).</p></li>
+        <li class="tl key" data-date="2027-01-25T09:00:00-08:00"><div class="tl-date">Mon, Jan 25, 2027 · 9:00 AM</div><h3>Kickoff webinar: case &amp; dataset release</h3><p>The official case prompt and play-by-play datasets are released at the live virtual tip-off.</p></li>
+        <li class="tl" data-date="2027-01-27T18:00:00-08:00"><div class="tl-date">Wed, Jan 27, 2027 · 6:00 PM (9:00 PM ET)</div><h3>Live technical &amp; modeling Q&amp;A, session 1</h3><p>Case and technical clarification for registered competitors.</p></li>
+        <li class="tl" data-date="2027-01-28T12:00:00-08:00"><div class="tl-date">Thu, Jan 28, 2027 · 12:00 PM (3:00 PM ET)</div><h3>Live technical &amp; modeling Q&amp;A, session 2</h3><p>Midday technical and modeling Q&amp;A.</p></li>
+        <li class="tl key" data-date="2027-02-07T23:59:00-08:00"><div class="tl-date">Sun, Feb 7, 2027 · 11:59 PM</div><h3>Case submission deadline</h3><p>Submit your live demo URL and GitHub repository. Repositories lock: no commits after this point.</p></li>
+        <li class="tl" data-date="2027-02-13T12:00:00-08:00"><div class="tl-date">Sat, Feb 13, 2027</div><h3>Finalists announced</h3><p>The top 3–5 teams are invited to the live finals broadcast.</p></li>
+        <li class="tl" data-date="2027-02-17T23:59:00-08:00"><div class="tl-date">Wed, Feb 17, 2027 · 11:59 PM</div><h3>Finalist tool lock &amp; tech rehearsal</h3><p>Finalists test their audio and video setup; live tool deployments lock.</p></li>
+        <li class="tl key" data-date="2027-02-20T09:00:00-08:00"><div class="tl-date">Sat, Feb 20, 2027 · 9:00–11:00 AM (12:00–2:00 PM ET)</div><h3>🏆 Live finals broadcast</h3><p>Finalists demo their tools live and take questions from the judging panel, streamed on Zoom Webinar and YouTube.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="kicker">Rules at a Glance</div>
+        <h2>What every team needs to know</h2>
+        <p>Highlights from the official rulebook.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="rule-tag">Eligibility</span>
+          <h3>Who can compete</h3>
+          <p>Graduate students currently enrolled in business analytics, data science, sports analytics, MBA or related quantitative programs at invited institutions. Teams of 4–5 students; each institution may nominate up to 2 teams. Rosters lock January 13, 2027, with substitutions only in extreme circumstances approved by the committee.</p>
+        </div>
+        <div class="card">
+          <span class="rule-tag">Critical</span>
+          <h3>Commit freeze</h3>
+          <p>No updates, pushes or commits are allowed between the submission deadline (Feb 7, 11:59 PM PST) and the final presentations. Commits timestamped after the deadline lead to point penalties or disqualification.</p>
+        </div>
+        <div class="card">
+          <span class="rule-tag">Critical</span>
+          <h3>Anonymity for blind review</h3>
+          <p>For Round 1 blind evaluation, your live tool must contain no school names, school colors, school logos or student names. Identifying marks result in immediate point deductions.</p>
+        </div>
+        <div class="card">
+          <span class="rule-tag">Data</span>
+          <h3>Provided data only</h3>
+          <p>Use only the competition dataset. Scraping or blending in outside data is not allowed. You're free to filter, aggregate, engineer features and model any subset of the provided data.</p>
+        </div>
+        <div class="card">
+          <span class="rule-tag">Submission</span>
+          <h3>How to submit</h3>
+          <p>Submit your live demo URL and GitHub repository link through the official competition portal. Repositories may be public, or private and shared with the committee's judging accounts.</p>
+        </div>
+        <div class="card">
+          <span class="rule-tag">Deadlines</span>
+          <h3>Late submissions</h3>
+          <table class="penalty">
+            <tr><td>Up to 12 hours late</td><td>−15%</td></tr>
+            <tr><td>12–24 hours late</td><td>−30%</td></tr>
+            <tr><td>Over 24 hours late</td><td>Not accepted</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="join">
+    <div class="wrap">
+      <h2>Bring your school's best analysts</h2>
+      <p>This is an invitation-based competition. Institutions indicate their intent to participate through the expression of interest form, and organizers follow up with verified registration links so school leads can confirm student rosters.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold interest-link" id="interest-btn" href="#join">Expression of Interest Form →</a>
+      </div>
+      <p class="fine"><strong>Students:</strong> to compete, contact your department chair, MSBA/MBA faculty director or sports analytics club president to coordinate your school's nomination.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 USC Marshall School of Business · MS in Business Analytics Program</div>
+      <div>Questions? Contact the USC Marshall Organizing Committee.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Paste the expression of interest form link here when it's ready.
+    const INTEREST_FORM_URL = "";
+
+    (function () {
+      // Interest links
+      const links = document.querySelectorAll(".interest-link");
+      if (INTEREST_FORM_URL) {
+        links.forEach(a => { a.href = INTEREST_FORM_URL; a.target = "_blank"; a.rel = "noopener"; });
+      } else {
+        const main = document.getElementById("interest-btn");
+        main.textContent = "Interest form opening soon";
+        main.setAttribute("aria-disabled", "true");
+        main.removeAttribute("href");
+      }
+
+      // Mobile menu
+      const btn = document.querySelector(".menu-btn"), list = document.getElementById("nav-links");
+      btn.addEventListener("click", () => { const o = list.classList.toggle("open"); btn.setAttribute("aria-expanded", o); });
+      list.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { list.classList.remove("open"); btn.setAttribute("aria-expanded", false); }));
+
+      // Timeline status + countdown to next milestone
+      const items = [...document.querySelectorAll("#timeline-list .tl")];
+      const now = Date.now();
+      let next = null;
+      items.forEach(li => {
+        const t = new Date(li.dataset.date).getTime();
+        if (t < now) li.classList.add("past");
+        else if (!next) { next = li; li.classList.add("next"); }
+      });
+      if (next) {
+        const target = new Date(next.dataset.date).getTime();
+        document.getElementById("cd-name").textContent = next.querySelector("h3").textContent.replace("🏆 ", "");
+        document.getElementById("cd-date").textContent = next.querySelector(".tl-date").textContent.split(" · ")[0];
+        document.getElementById("countdown").hidden = false;
+        const tick = () => {
+          let s = Math.max(0, Math.floor((target - Date.now()) / 1000));
+          document.getElementById("cd-d").textContent = Math.floor(s / 86400);
+          document.getElementById("cd-h").textContent = Math.floor(s % 86400 / 3600);
+          document.getElementById("cd-m").textContent = Math.floor(s % 3600 / 60);
+        };
+        tick(); setInterval(tick, 30000);
+      }
+    })();
+  </script>
+</body>
+</html>
