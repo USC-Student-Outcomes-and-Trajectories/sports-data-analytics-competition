@@ -1,126 +1,150 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <meta property="og:title" content="USC Marshall Sports Data Analytics Competition">
-  <meta property="og:description"
-    content="Build a live, interactive dashboard from real in-game NBA data and present it to industry professionals. Fully virtual, free, and open to universities worldwide. Live finals February 20, 2027.">
-  <meta property="og:image" content="assets/og-image.jpg">
-  <meta property="og:type" content="website">
-  <title>USC Marshall Sports Data Analytics Competition</title>
-  <meta name="description"
-    content="The inaugural USC Marshall Sports Data Analytics Competition: build a live, interactive dashboard from real in-game NBA data and present it to industry professionals.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem("theme");
-        if (t === "dark") {
-          document.documentElement.setAttribute("data-theme", "dark");
-        } else {
-          document.documentElement.setAttribute("data-theme", "light");
-        }
-      } catch (e) { }
-    })();
-  </script>
-  <style>
-    /* Layout: court-red hero → scoreboard date strip → Compete/Build/Win → timeline → judging → FAQ → gold footer. Built from the Court poster flyer. */
-    :root {
-      --cardinal: #990000;
-      --cardinal-deep: #7A0000;
-      --gold: #FFCC00;
-      --ink: #1B1B1F;
-      --body: #3A3A42;
-      --muted: #5E5E66;
-      --paper: #FBF8F2;
-      --surface: #FFFFFF;
-      --rule: #E2DDD3;
-      --on-cardinal: #FFFFFF;
-      --on-cardinal-soft: #F5DADA;
-      --strip: #1B1B1F;
-      --strip-label: #BDBDC4;
-      --link: #990000;
-      --title: #990000;
-      --focus: #1B66D6;
-      --f-display: "Anton", Impact, "Arial Narrow", sans-serif;
-      --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-      --wrap: 1120px;
-      color-scheme: light;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta property="og:title" content="USC Marshall Sports Data Analytics Competition">
+<meta property="og:description" content="Build a live, interactive dashboard from real in-game NBA data and present it to industry professionals. Fully virtual, free, and open to universities worldwide. Live finals February 20, 2027.">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:type" content="website">
+<title>USC Marshall Sports Data Analytics Competition</title>
+<meta name="description" content="The inaugural USC Marshall Sports Data Analytics Competition: build a live, interactive dashboard from real in-game NBA data and present it to industry professionals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: court-red hero → scoreboard date strip → Compete/Build/Win → timeline → judging → FAQ → gold footer. Built from the Court poster flyer. */
+:root {
+  --cardinal: #990000;
+  --cardinal-deep: #7A0000;
+  --gold: #FFCC00;
+  --ink: #1B1B1F;
+  --body: #3A3A42;
+  --muted: #5E5E66;
+  --paper: #FBF8F2;
+  --surface: #FFFFFF;
+  --rule: #E2DDD3;
+  --on-cardinal: #FFFFFF;
+  --on-cardinal-soft: #F5DADA;
+  --strip: #1B1B1F;
+  --strip-label: #BDBDC4;
+  --link: #990000;
+  --title: #990000;
+  --focus: #1B66D6;
+  --f-display: "Anton", Impact, "Arial Narrow", sans-serif;
+  --f-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --wrap: 1120px;
+}
 
-    :root[data-theme="light"] {
-      --ink: #1B1B1F;
-      --body: #3A3A42;
-      --muted: #5E5E66;
-      --paper: #FBF8F2;
-      --surface: #FFFFFF;
-      --rule: #E2DDD3;
-      --strip: #1B1B1F;
-      --strip-label: #BDBDC4;
-      --link: #990000;
-      --title: #990000;
-      --cardinal-deep: #7A0000;
-      color-scheme: light;
-    }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--body); font: 400 16px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; }
+a { color: var(--link); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); text-wrap: balance; margin: 0; line-height: 1; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font: 700 12px/1.4 var(--f-body); letter-spacing: .14em; text-transform: uppercase; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--gold); color: #1B1B1F; padding: 8px 12px; z-index: 50; }
+.skip:focus { left: 8px; }
 
-    :root[data-theme="dark"] {
-      --ink: #F3EFE8;
-      --body: #CFCAC2;
-      --muted: #A9A49C;
-      --paper: #141215;
-      --surface: #1D1A1E;
-      --rule: #34303A;
-      --strip: #0B0A0C;
-      --link: #FF8A80;
-      --title: #FF8A80;
-      --cardinal-deep: #5E0000;
-      color-scheme: dark;
-    }
+/* Nav */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--cardinal); color: var(--on-cardinal); border-bottom: 1px solid rgba(255,255,255,.12); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 21; background: var(--cardinal); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { color: inherit; text-decoration: none; font: 700 12px/1.3 var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
+.brand span { display: block; color: var(--gold); }
+.nav ul { display: flex; flex-wrap: wrap; gap: 4px 20px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { color: var(--on-cardinal); text-decoration: none; font: 600 14px var(--f-body); padding: 10px 0; display: inline-block; }
+.nav ul a:hover { color: var(--gold); }
+@media (max-width: 760px) { .nav ul { display: none; } }
 
-    * {
-      box-sizing: border-box;
-    }
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 12px 22px; font: 700 15px var(--f-body); text-decoration: none; border: 2px solid transparent; transition: transform .15s ease, background .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-gold { background: var(--gold); color: #1B1B1F; }
+.btn-ghost { color: var(--on-cardinal); border-color: rgba(255,255,255,.55); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-red { background: var(--cardinal); color: #fff; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* Hero */
+.hero { position: relative; overflow: hidden; background: var(--cardinal); color: var(--on-cardinal); }
+.court { position: absolute; right: -6%; top: 50%; transform: translateY(-50%); height: 118%; width: auto; opacity: .38; pointer-events: none; }
+.hero .wrap { position: relative; padding-block: 64px 64px; display: grid; gap: 28px; }
+.org { display: grid; gap: 4px; margin: 0; font: 700 12.5px/1.45 var(--f-body); letter-spacing: .12em; text-transform: uppercase; }
+.org a { color: var(--gold); text-decoration: none; justify-self: start; }
+.org a:hover { text-decoration: underline; }
+.tag { display: inline-block; justify-self: start; border: 2px solid var(--gold); color: var(--gold); padding: 6px 12px; }
+.hero h1 { color: var(--on-cardinal); font-size: clamp(56px, 11vw, 132px); line-height: .92; }
+.hero h1 em { font-style: normal; color: var(--gold); display: block; }
+.hero .name { font: 400 clamp(20px, 2.6vw, 28px)/1.15 var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
+.hero p.lede { margin: 0; max-width: 58ch; font-size: clamp(16px, 1.6vw, 19px); color: var(--on-cardinal-soft); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.next { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; color: var(--on-cardinal-soft); font-size: 14px; }
+.next strong { color: var(--on-cardinal); font-weight: 600; }
+.next .count { font: 500 14px var(--f-mono); color: var(--gold); font-variant-numeric: tabular-nums; }
 
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
+/* Score strip */
+.strip { background: var(--strip); color: #fff; }
+.strip ol { list-style: none; margin: 0 auto; padding: 0; max-width: var(--wrap); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.strip li { padding: 18px 20px; display: grid; gap: 2px; border-left: 1px solid #3A3A42; }
+.strip li:first-child { border-left: 0; padding-left: max(24px, env(safe-area-inset-left, 0px)); }
+.strip li.final { background: var(--gold); color: #1B1B1F; border-left: 0; }
+.strip .eyebrow { color: var(--strip-label); font-size: 11px; }
+.strip li.final .eyebrow { color: #1B1B1F; }
+.strip .d { font: 400 28px/1.05 var(--f-display); letter-spacing: .02em; margin-block: 2px 4px; }
+.strip .s { font-size: 12.5px; line-height: 1.45; color: #FFFFFF; }
+.strip .s a { color: var(--gold); font-weight: 700; }
+.strip li.final .s { color: #1B1B1F; font-weight: 600; }
+.strip li.past { opacity: .5; }
+@media (max-width: 760px) { .strip ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } .strip li:nth-child(3) { border-left: 0; padding-left: max(24px, env(safe-area-inset-left, 0px)); } .strip li { border-top: 1px solid #3A3A42; } }
 
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
+/* Sections */
+section.block { padding-block: 88px 24px; }
+.head { display: grid; gap: 10px; margin-bottom: 36px; max-width: 62ch; }
+.head .eyebrow { color: var(--link); }
+.head h2 { font-size: clamp(36px, 5vw, 56px); }
+.head p { margin: 0; color: var(--body); }
 
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--body);
-      font: 400 16px/1.6 var(--f-body);
-      -webkit-font-smoothing: antialiased;
-    }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.col { padding: 0; display: grid; align-content: start; gap: 16px; min-width: 0; }
+.col h3 { font-size: 34px; color: var(--title); padding-bottom: 12px; border-bottom: 4px solid var(--gold); }
+.col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.col li { padding-left: 18px; position: relative; }
+.col li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; background: var(--gold); }
+.col strong { color: var(--ink); font-weight: 650; }
+@media (max-width: 900px) { .cols { grid-template-columns: minmax(0, 1fr); } }
 
-    a {
-      color: var(--link);
-    }
+/* Timeline */
+.tz { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 24px; font-size: 14px; }
+.tz button { font: 600 14px var(--f-body); min-height: 40px; padding: 8px 14px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tz button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.timeline { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.timeline li { display: grid; grid-template-columns: 170px minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.timeline .when { font: 400 22px/1.1 var(--f-display); text-transform: uppercase; color: var(--ink); letter-spacing: .02em; }
+.timeline .what { color: var(--ink); font-weight: 600; }
+.timeline .what small { display: block; font-weight: 400; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.timeline .time { font: 500 13.5px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.timeline li.key .when { color: var(--link); }
+.timeline li.done { opacity: .55; }
+.timeline li.upnext { background: linear-gradient(90deg, rgba(255,204,0,.18), transparent 70%); }
+.pill { display: inline-block; margin-left: 8px; padding: 2px 8px; background: var(--gold); color: #1B1B1F; font: 700 11px var(--f-body); letter-spacing: .08em; text-transform: uppercase; vertical-align: 2px; }
+@media (max-width: 640px) { .timeline li { grid-template-columns: minmax(0, 1fr); } .timeline .time { text-align: left; } }
 
-    a:focus-visible,
-    button:focus-visible,
-    summary:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
+/* Judging */
+.judging { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.criteria { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.criteria li { background: var(--surface); border: 1px solid var(--rule); padding: 22px; display: grid; gap: 6px; }
+.criteria h3 { font-size: 24px; }
+.criteria p { margin: 0; font-size: 15px; }
+.panel { background: var(--cardinal); color: var(--on-cardinal); padding: 28px; display: grid; gap: 14px; }
+.panel h3 { color: var(--on-cardinal); font-size: 26px; }
+.panel p { margin: 0; color: var(--on-cardinal-soft); }
+.panel p strong { color: var(--on-cardinal); }
+@media (max-width: 900px) { .judging { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { .criteria { grid-template-columns: minmax(0, 1fr); } }
 
 /* Organized by */
 .orgby { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
@@ -136,1265 +160,345 @@
 .partners img { display: block; width: 100%; height: 100%; object-fit: contain; }
 @media (max-width: 760px) { .orgby { grid-template-columns: minmax(0, 1fr); } }
 
-    .wrap {
-      max-width: var(--wrap);
-      margin: 0 auto;
-      padding-left: max(24px, env(safe-area-inset-left, 0px));
-      padding-right: max(24px, env(safe-area-inset-right, 0px));
-    }
-
-    .eyebrow {
-      font: 700 12px/1.4 var(--f-body);
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .skip {
-      position: absolute;
-      left: -999px;
-      top: 8px;
-      background: var(--gold);
-      color: #1B1B1F;
-      padding: 8px 12px;
-      z-index: 50;
-    }
-
-    .skip:focus {
-      left: 8px;
-    }
-
-    /* Nav */
-    .nav {
-      position: sticky;
-      top: env(safe-area-inset-top, 0px);
-      z-index: 20;
-      background: var(--cardinal);
-      color: var(--on-cardinal);
-      border-bottom: 1px solid rgba(255, 255, 255, .12);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0 0 auto;
-      height: env(safe-area-inset-top, 0px);
-      z-index: 21;
-      background: var(--cardinal);
-    }
-
-    .nav .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-block: 12px;
-    }
-
-    .brand {
-      color: inherit;
-      text-decoration: none;
-      font: 700 12px/1.3 var(--f-body);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .brand span {
-      display: block;
-      color: var(--gold);
-    }
-
-    .nav ul {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px 20px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav ul a {
-      color: var(--on-cardinal);
-      text-decoration: none;
-      font: 600 14px var(--f-body);
-      padding: 10px 0;
-      display: inline-block;
-    }
-
-    .nav ul a:hover {
-      color: var(--gold);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 32px;
-      padding: 4px 11px;
-      font: 600 13px/1 var(--f-body);
-      color: var(--on-cardinal);
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 204, 0, 0.45);
-      border-radius: 999px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
-    }
-
-    .theme-toggle:hover {
-      background: rgba(255, 204, 0, 0.22);
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-1px);
-    }
-
-    .theme-toggle svg {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
-
-    :root:not([data-theme="dark"]) .theme-toggle .moon-icon {
-      display: none;
-    }
-
-    :root:not([data-theme="dark"]) .theme-toggle .sun-icon {
-      display: inline-block;
-      color: var(--gold);
-    }
-
-    :root[data-theme="dark"] .theme-toggle .sun-icon {
-      display: none;
-    }
-
-    :root[data-theme="dark"] .theme-toggle .moon-icon {
-      display: inline-block;
-      color: var(--gold);
-    }
-
-    @media (max-width: 760px) {
-      .nav ul {
-        display: none;
-      }
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 12px 22px;
-      font: 700 15px var(--f-body);
-      text-decoration: none;
-      border: 2px solid transparent;
-      transition: transform .15s ease, background .15s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: #1B1B1F;
-    }
-
-    .btn-ghost {
-      color: var(--on-cardinal);
-      border-color: rgba(255, 255, 255, .55);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .btn-red {
-      background: var(--cardinal);
-      color: #fff;
-    }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      background: var(--cardinal);
-      color: var(--on-cardinal);
-    }
-
-    .court {
-      position: absolute;
-      right: -6%;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 118%;
-      width: auto;
-      opacity: .38;
-      pointer-events: none;
-    }
-
-    .hero .wrap {
-      position: relative;
-      padding-block: 64px 64px;
-      display: grid;
-      gap: 28px;
-    }
-
-    .org {
-      display: grid;
-      gap: 4px;
-      margin: 0;
-      font: 700 12.5px/1.45 var(--f-body);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .org a {
-      color: var(--gold);
-      text-decoration: none;
-      justify-self: start;
-    }
-
-    .org a:hover {
-      text-decoration: underline;
-    }
-
-    .tag {
-      display: inline-block;
-      justify-self: start;
-      border: 2px solid var(--gold);
-      color: var(--gold);
-      padding: 6px 12px;
-    }
-
-    .hero h1 {
-      color: var(--on-cardinal);
-      font-size: clamp(56px, 11vw, 132px);
-      line-height: .92;
-    }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--gold);
-      display: block;
-    }
-
-    .hero .name {
-      font: 400 clamp(20px, 2.6vw, 28px)/1.15 var(--f-display);
-      text-transform: uppercase;
-      letter-spacing: .02em;
-    }
-
-    .hero p.lede {
-      margin: 0;
-      max-width: 58ch;
-      font-size: clamp(16px, 1.6vw, 19px);
-      color: var(--on-cardinal-soft);
-    }
-
-    .hero .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .next {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 6px 14px;
-      color: var(--on-cardinal-soft);
-      font-size: 14px;
-    }
-
-    .next strong {
-      color: var(--on-cardinal);
-      font-weight: 600;
-    }
-
-    .next .count {
-      font: 500 14px var(--f-mono);
-      color: var(--gold);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Score strip */
-    .strip {
-      background: var(--strip);
-      color: #fff;
-    }
-
-    .strip ol {
-      list-style: none;
-      margin: 0 auto;
-      padding: 0;
-      max-width: var(--wrap);
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .strip li {
-      padding: 18px 20px;
-      display: grid;
-      gap: 2px;
-      border-left: 1px solid #3A3A42;
-    }
-
-    .strip li:first-child {
-      border-left: 0;
-      padding-left: max(24px, env(safe-area-inset-left, 0px));
-    }
-
-    .strip li.final {
-      background: var(--gold);
-      color: #1B1B1F;
-      border-left: 0;
-    }
-
-    .strip .eyebrow {
-      color: var(--strip-label);
-      font-size: 11px;
-    }
-
-    .strip li.final .eyebrow {
-      color: #1B1B1F;
-    }
-
-    .strip .d {
-      font: 400 28px/1.05 var(--f-display);
-      letter-spacing: .02em;
-      margin-block: 2px 4px;
-    }
-
-    .strip .s {
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: #FFFFFF;
-    }
-
-    .strip .s a {
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .strip li.final .s {
-      color: #1B1B1F;
-      font-weight: 600;
-    }
-
-    .strip li.past {
-      opacity: .5;
-    }
-
-    @media (max-width: 760px) {
-      .strip ol {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .strip li:nth-child(3) {
-        border-left: 0;
-        padding-left: max(24px, env(safe-area-inset-left, 0px));
-      }
-
-      .strip li {
-        border-top: 1px solid #3A3A42;
-      }
-    }
-
-    /* Sections */
-    section.block {
-      padding-block: 88px 24px;
-    }
-
-    .head {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 36px;
-      max-width: 62ch;
-    }
-
-    .head .eyebrow {
-      color: var(--link);
-    }
-
-    .head h2 {
-      font-size: clamp(36px, 5vw, 56px);
-    }
-
-    .head p {
-      margin: 0;
-      color: var(--body);
-    }
-
-    .cols {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 40px;
-    }
-
-    .col {
-      padding: 0;
-      display: grid;
-      align-content: start;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .col h3 {
-      font-size: 34px;
-      color: var(--title);
-      padding-bottom: 12px;
-      border-bottom: 4px solid var(--gold);
-    }
-
-    .col ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 12px;
-    }
-
-    .col li {
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .col li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .62em;
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
-    }
-
-    .col strong {
-      color: var(--ink);
-      font-weight: 650;
-    }
-
-    @media (max-width: 900px) {
-      .cols {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Timeline */
-    .tz {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-
-    .tz button {
-      font: 600 14px var(--f-body);
-      min-height: 40px;
-      padding: 8px 14px;
-      border: 1px solid var(--rule);
-      background: var(--surface);
-      color: var(--ink);
-      cursor: pointer;
-    }
-
-    .tz button[aria-pressed="true"] {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
-    }
-
-    .timeline {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      border-top: 2px solid var(--ink);
-    }
-
-    .timeline li {
-      display: grid;
-      grid-template-columns: 170px minmax(0, 1fr) auto;
-      gap: 8px 24px;
-      align-items: baseline;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .timeline .when {
-      font: 400 22px/1.1 var(--f-display);
-      text-transform: uppercase;
-      color: var(--ink);
-      letter-spacing: .02em;
-    }
-
-    .timeline .what {
-      color: var(--ink);
-      font-weight: 600;
-    }
-
-    .timeline .what small {
-      display: block;
-      font-weight: 400;
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 2px;
-    }
-
-    .timeline .time {
-      font: 500 13.5px var(--f-mono);
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-      text-align: right;
-    }
-
-    .timeline li.key .when {
-      color: var(--link);
-    }
-
-    .timeline li.done {
-      opacity: .55;
-    }
-
-    .timeline li.upnext {
-      background: linear-gradient(90deg, rgba(255, 204, 0, .18), transparent 70%);
-    }
-
-    .pill {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 2px 8px;
-      background: var(--gold);
-      color: #1B1B1F;
-      font: 700 11px var(--f-body);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      vertical-align: 2px;
-    }
-
-    @media (max-width: 640px) {
-      .timeline li {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .timeline .time {
-        text-align: left;
-      }
-    }
-
-    /* Judging */
-    .judging {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: start;
-    }
-
-    .criteria {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .criteria li {
-      background: var(--surface);
-      border: 1px solid var(--rule);
-      padding: 22px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .criteria h3 {
-      font-size: 24px;
-    }
-
-    .criteria p {
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .panel {
-      background: var(--cardinal);
-      color: var(--on-cardinal);
-      padding: 28px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .panel h3 {
-      color: var(--on-cardinal);
-      font-size: 26px;
-    }
-
-    .panel p {
-      margin: 0;
-      color: var(--on-cardinal-soft);
-    }
-
-    .panel p strong {
-      color: var(--on-cardinal);
-    }
-
-    @media (max-width: 900px) {
-      .judging {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 520px) {
-      .criteria {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Organized by */
-    .orgby {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 40px;
-    }
-
-    .orgby h3 {
-      font-size: 26px;
-      color: var(--title);
-      padding-bottom: 10px;
-      border-bottom: 4px solid var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .people,
-    .partners {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 16px;
-    }
-
-    .people li,
-    .partners li {
-      background: var(--surface);
-      border: 1px solid var(--rule);
-      padding: 20px 22px;
-      display: grid;
-      gap: 4px;
-    }
-
-    .people .nm {
-      font: 600 18px/1.3 var(--f-body);
-      color: var(--ink);
-    }
-
-    .people .rl {
-      color: var(--body);
-      font-size: 15px;
-    }
-
-    .partners {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .partners li {
-      padding: 0;
-      background: none;
-      border: 0;
-      display: block;
-    }
-
-    .partners a {
-      display: block;
-      aspect-ratio: 1 / 1;
-      max-width: 100%;
-      border: 3px solid var(--gold);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #FFFFFF;
-      transition: transform .15s ease;
-    }
-
-    .partners a:hover {
-      transform: translateY(-2px);
-    }
-
-    .partners img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    @media (max-width: 760px) {
-      .orgby {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* FAQ */
-    .faq {
-      display: grid;
-      gap: 0;
-      border-top: 2px solid var(--ink);
-      max-width: 860px;
-    }
-
-    .faq details {
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .faq summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 20px 0;
-      font: 600 17px/1.4 var(--f-body);
-      color: var(--ink);
-    }
-
-    .faq summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq summary::after {
-      content: "+";
-      font: 400 26px/1 var(--f-display);
-      color: var(--link);
-      flex: none;
-    }
-
-    .faq details[open] summary::after {
-      content: "–";
-    }
-
-    .faq .a {
-      padding: 0 0 22px;
-      max-width: 70ch;
-    }
-
-    .faq .a p {
-      margin: 0 0 10px;
-    }
-
-    /* CTA footer */
-    .cta {
-      margin-top: 96px;
-      background: var(--gold);
-      color: #1B1B1F;
-    }
-
-    .cta .wrap {
-      padding-block: 48px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .cta h2 {
-      color: #1B1B1F;
-      font-size: clamp(30px, 4vw, 44px);
-    }
-
-    .cta p {
-      margin: 8px 0 0;
-      font-size: 16px;
-    }
-
-    .cta .mail {
-      display: inline-flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .cta .mail code {
-      font: 600 15px var(--f-mono);
-      background: rgba(27, 27, 31, .08);
-      padding: 4px 8px;
-      word-break: break-all;
-    }
-
-    .cta .mail button {
-      font: 600 13px var(--f-body);
-      min-height: 36px;
-      padding: 6px 12px;
-      border: 1px solid #1B1B1F;
-      background: transparent;
-      color: #1B1B1F;
-      cursor: pointer;
-    }
-
-    footer.base {
-      background: var(--strip);
-      color: #BDBDC4;
-      font-size: 13.5px;
-    }
-
-    footer.base .wrap {
-      padding-block: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    footer.base a {
-      color: #fff;
-    }
-  </style>
+/* FAQ */
+.faq { display: grid; gap: 0; border-top: 2px solid var(--ink); max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; font: 600 17px/1.4 var(--f-body); color: var(--ink); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 400 26px/1 var(--f-display); color: var(--link); flex: none; }
+.faq details[open] summary::after { content: "–"; }
+.faq .a { padding: 0 0 22px; max-width: 70ch; }
+.faq .a p { margin: 0 0 10px; }
+
+/* CTA footer */
+.cta { margin-top: 96px; background: var(--gold); color: #1B1B1F; }
+.cta .wrap { padding-block: 48px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+.cta h2 { color: #1B1B1F; font-size: clamp(30px, 4vw, 44px); }
+.cta p { margin: 8px 0 0; font-size: 16px; }
+.cta .mail { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.cta .mail code { font: 600 15px var(--f-mono); background: rgba(27,27,31,.08); padding: 4px 8px; word-break: break-all; }
+.cta .mail button { font: 600 13px var(--f-body); min-height: 36px; padding: 6px 12px; border: 1px solid #1B1B1F; background: transparent; color: #1B1B1F; cursor: pointer; }
+footer.base { background: var(--strip); color: #BDBDC4; font-size: 13.5px; }
+footer.base .wrap { padding-block: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+footer.base a { color: #fff; }
+</style>
 </head>
-
 <body>
 
 
-  <a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
-  <header class="nav">
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">USC Marshall<span>Sports Data Analytics Competition</span></a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#judging">Judging</a></li>
+        <li><a href="#organizers">Organized by</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <svg class="court" viewBox="0 0 480 520" fill="none" stroke="#FFCC00" stroke-width="3" aria-hidden="true">
+      <path d="M480 24 H340 A236 236 0 0 0 340 496 H480"></path>
+      <rect x="282" y="180" width="200" height="160"></rect>
+      <circle cx="282" cy="260" r="62"></circle>
+      <circle cx="432" cy="260" r="11"></circle>
+      <line x1="454" y1="228" x2="454" y2="292"></line>
+      <path d="M282 198 A62 62 0 0 0 282 322" stroke-dasharray="10 10"></path>
+    </svg>
     <div class="wrap">
-      <a class="brand" href="#top">USC Marshall<span>Sports Data Analytics Competition</span></a>
-      <div class="nav-right">
-        <nav aria-label="Sections">
+      <p class="org"><span>Jointly organized by</span><a href="https://www.marshall.usc.edu/programs/graduate-programs/specialized-masters/ms-business-analytics" target="_blank" rel="noopener">USC Marshall MS in Business Analytics</a><a href="https://www.trojanssportsresearchlab.com" target="_blank" rel="noopener">Trojans Sports Research Lab</a></p>
+      <h1 id="hero-title">Call the next play <em>with data.</em></h1>
+      <span class="tag eyebrow">Inaugural Edition · 2027</span>
+      <p class="name">USC Marshall Sports Data Analytics Competition</p>
+      <p class="lede">Build and present a live dashboard using real in-game NBA data to a panel of analytics professionals.</p>
+      <div class="actions">
+        <a class="btn btn-gold" id="primary-cta" href="#contact">Submit your expression of interest</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+      <p class="next" id="next-up" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <div class="strip" aria-label="Key dates">
+    <ol id="strip"></ol>
+  </div>
+
+  <section class="block" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">Compete. Build. Win.</h2>
+        <p>Your team gets a shared NBA dataset and two weeks to turn it into a tool a coach could use from the bench.</p>
+      </div>
+      <div class="cols">
+        <article class="col">
+          <h3>Compete</h3>
           <ul>
-            <li><a href="#how">How it works</a></li>
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#judging">Judging</a></li>
-            <li><a href="#organizers">Organized by</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><strong>Open to graduate and undergraduate students from universities globally.</strong></li>
+            <li><strong>Teams of 4–5</strong>; each school may nominate up to 2.</li>
+            <li><strong>Students:</strong> Request your program director or analytics program director to nominate you.</li>
           </ul>
-        </nav>
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to night mode" title="Toggle Day/Night mode">
-          <svg class="sun-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <span class="theme-text">Day</span>
-        </button>
+        </article>
+        <article class="col">
+          <h3>Build</h3>
+          <ul>
+            <li><strong>We provide the dataset.</strong> You provide the insights.</li>
+            <li>A <strong>live, interactive dashboard</strong> that enables real-time decisions for coaches and general managers.</li>
+            <li><strong>GitHub repo + live demo</strong>; repo locks Feb 7, 2027.</li>
+          </ul>
+        </article>
+        <article class="col">
+          <h3>Win</h3>
+          <ul>
+            <li><strong>Evaluated on:</strong> Actionability · Clarity · Feasibility · Ability to defend &amp; explain</li>
+            <li><strong>Audience:</strong> Finals stream live on Zoom to students, faculty and industry analytics leaders worldwide.</li>
+            <li><strong>Judging:</strong> An independent panel of experienced industry professionals, selected by the Faculty Co-Directors.</li>
+          </ul>
+        </article>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <svg class="court" viewBox="0 0 480 520" fill="none" stroke="#FFCC00" stroke-width="3" aria-hidden="true">
-        <path d="M480 24 H340 A236 236 0 0 0 340 496 H480"></path>
-        <rect x="282" y="180" width="200" height="160"></rect>
-        <circle cx="282" cy="260" r="62"></circle>
-        <circle cx="432" cy="260" r="11"></circle>
-        <line x1="454" y1="228" x2="454" y2="292"></line>
-        <path d="M282 198 A62 62 0 0 0 282 322" stroke-dasharray="10 10"></path>
-      </svg>
-      <div class="wrap">
-        <p class="org"><span>Jointly organized by</span><a
-            href="https://www.marshall.usc.edu/programs/graduate-programs/specialized-masters/ms-business-analytics"
-            target="_blank" rel="noopener">USC Marshall MS in Business Analytics</a><a
-            href="https://www.trojanssportsresearchlab.com" target="_blank" rel="noopener">Trojans Sports Research
-            Lab</a></p>
-        <h1 id="hero-title">Call the next play <em>with data.</em></h1>
-        <span class="tag eyebrow">Inaugural Edition · 2027</span>
-        <p class="name">USC Marshall Sports Data Analytics Competition</p>
-        <p class="lede">Build and present a live dashboard using real in-game NBA data to a panel of analytics
-          professionals.</p>
-        <div class="actions">
-          <a class="btn btn-gold" id="primary-cta" href="#contact">Submit your expression of interest</a>
-          <a class="btn btn-ghost" href="#how">How it works</a>
-        </div>
-        <p class="next" id="next-up" aria-live="polite"></p>
-      </div>
-    </section>
-
-    <div class="strip" aria-label="Key dates">
-      <ol id="strip"></ol>
-    </div>
-
-    <section class="block" id="how" aria-labelledby="how-title">
-      <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title">Compete. Build. Win.</h2>
-          <p>Your team gets a shared NBA dataset and two weeks to turn it into a tool a coach could use from the bench.
-          </p>
-        </div>
-        <div class="cols">
-          <article class="col">
-            <h3>Compete</h3>
-            <ul>
-              <li><strong>Open to graduate and undergraduate students from universities globally.</strong></li>
-              <li><strong>Teams of 4–5</strong>; each school may nominate up to 2.</li>
-              <li><strong>Students:</strong> Request your program director or analytics program director to nominate
-                you.</li>
-            </ul>
-          </article>
-          <article class="col">
-            <h3>Build</h3>
-            <ul>
-              <li><strong>We provide the dataset.</strong> You provide the insights.</li>
-              <li>A <strong>live, interactive dashboard</strong> that enables real-time decisions for coaches and
-                general managers.</li>
-              <li><strong>GitHub repo + live demo</strong>; repo locks Feb 7, 2027.</li>
-            </ul>
-          </article>
-          <article class="col">
-            <h3>Win</h3>
-            <ul>
-              <li><strong>Evaluated on:</strong> Actionability · Clarity · Feasibility · Ability to defend &amp; explain
-              </li>
-              <li><strong>Audience:</strong> Finals stream live on Zoom to students, faculty and industry analytics
-                leaders worldwide.</li>
-              <li><strong>Judging:</strong> An independent panel of experienced industry professionals, selected by the
-                Faculty Co-Directors.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="timeline" aria-labelledby="tl-title">
-      <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">Timeline</p>
-          <h2 id="tl-title">Season schedule</h2>
-          <p>All official deadlines are in Pacific Time. Switch to your own time zone to see when each session starts
-            where you are.</p>
-        </div>
-        <div class="tz" role="group" aria-label="Time zone">
-          <span>Show times in:</span>
-          <button type="button" id="tz-pt" aria-pressed="true">Pacific Time</button>
-          <button type="button" id="tz-local" aria-pressed="false">My time zone</button>
-        </div>
-        <ol class="timeline" id="timeline-list"></ol>
-      </div>
-    </section>
-
-    <section class="block" id="judging" aria-labelledby="judging-title">
-      <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">Judging</p>
-          <h2 id="judging-title">What the judges look for</h2>
-        </div>
-        <div class="judging">
-          <ul class="criteria">
-            <li>
-              <h3>Actionability</h3>
-              <p>Does the tool lead straight to a coaching decision during the game?</p>
-            </li>
-            <li>
-              <h3>Clarity</h3>
-              <p>Can a coach read it at a glance and understand it immediately?</p>
-            </li>
-            <li>
-              <h3>Feasibility</h3>
-              <p>Would it hold up under live, high-speed game conditions?</p>
-            </li>
-            <li>
-              <h3>Defend &amp; explain</h3>
-              <p>Can your team explain the logic, the code and the choices behind it?</p>
-            </li>
-          </ul>
-          <aside class="panel">
-            <h3>Who's judging</h3>
-            <p><strong>An independent panel of experienced industry professionals</strong>, selected by the Faculty
-              Co-Directors.</p>
-            <p><strong>AI tools are welcome.</strong> Teams are judged on the quality of what they build and how well
-              they defend their analytical logic.</p>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="organizers" aria-labelledby="org-title">
-      <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">The team</p>
-          <h2 id="org-title">Organized by</h2>
-        </div>
-        <div class="orgby">
-          <div>
-            <h3>Faculty Co-Directors</h3>
-            <ul class="people">
-              <li><span class="nm">Dr. Milan Miric</span><span class="rl">USC Marshall School of Business</span></li>
-              <li><span class="nm">Dr. Lorena Martin</span><span class="rl">Director, Trojans Sports Research Lab</span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3>Supporting Organizations</h3>
-            <ul class="partners">
-              <li><a
-                  href="https://www.marshall.usc.edu/programs/graduate-programs/specialized-masters/ms-business-analytics"
-                  target="_blank" rel="noopener" aria-label="USC Marshall MS in Business Analytics"><img
-                    src="assets/logo-msba.jpg" alt="USC Marshall MS in Business Analytics logo" width="320"
-                    height="320"></a></li>
-              <li><a href="https://www.trojanssportsresearchlab.com" target="_blank" rel="noopener"
-                  aria-label="Trojans Sports Research Lab"><img src="assets/logo-trojans.jpg"
-                    alt="Trojans Sports Research Lab logo" width="320" height="320"></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="faq" aria-labelledby="faq-title">
-      <div class="wrap">
-        <div class="head">
-          <p class="eyebrow">FAQ</p>
-          <h2 id="faq-title">Questions</h2>
-        </div>
-        <div class="faq">
-          <details>
-            <summary>Who can compete?</summary>
-            <div class="a">
-              <p>Graduate and undergraduate students in business analytics, data science, sports analytics and MBA
-                programs, from universities anywhere in the world.</p>
-            </div>
-          </details>
-          <details>
-            <summary>How do students sign up?</summary>
-            <div class="a">
-              <p>Schools register, not individual students. Your program submits an expression of interest, and
-                organizers follow up with registration links so school leads can confirm rosters by January 13, 2027.
-              </p>
-              <p>If you're a student, request your program director or analytics program director to nominate you.</p>
-            </div>
-          </details>
-          <details>
-            <summary>How big are teams, and how many can a school send?</summary>
-            <div class="a">
-              <p>Teams have 4 to 5 students. Each school may nominate up to 2 teams.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Does it cost anything? Do we need to travel?</summary>
-            <div class="a">
-              <p>No and no. Participation is free and the whole competition, including the finals, is virtual.</p>
-            </div>
-          </details>
-          <details>
-            <summary>What exactly do we submit?</summary>
-            <div class="a">
-              <p>A GitHub repository containing all your code and pipelines, and a link to a live demo hosted on GitHub,
-                such as GitHub Pages or a GitHub-deployed web app. The tool should be self-explanatory and let judges
-                choose a game, time or situation.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Can we keep working after the deadline?</summary>
-            <div class="a">
-              <p>No. Repositories lock at 11:59 PM PT on February 7, 2027. No edits are allowed between the deadline and
-                the final presentations.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Can we use outside data or AI tools?</summary>
-            <div class="a">
-              <p>Only the competition dataset may be used. AI tools are allowed and encouraged, but be ready to explain
-                and defend every analytical choice.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Where can we ask technical questions?</summary>
-            <div class="a">
-              <p>At the kickoff on January 25 and at two live Q&amp;A sessions on Zoom on January 27 and 28. For
-                anything else, email the organizers.</p>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="contact" aria-labelledby="cta-title">
-      <div class="wrap">
-        <div>
-          <h2 id="cta-title">Submit your expression of interest</h2>
-          <p>Schools: submit your expression of interest by January 13, 2027.</p>
-          <p class="mail">Questions? Email the organizers: <a
-              href="mailto:SportsAnalyticsCaseComp@marshall.usc.edu"><code>SportsAnalyticsCaseComp@marshall.usc.edu</code></a>
-            <button type="button" id="copy-mail">Copy</button>
-          </p>
-        </div>
-        <a class="btn btn-red" id="cta-form" href="#contact">Register interest</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="base">
+  <section class="block" id="timeline" aria-labelledby="tl-title">
     <div class="wrap">
-      <span>Jointly organized by the USC Marshall MS in Business Analytics &amp; the Trojans Sports Research Lab</span>
-      <span>© 2026 University of Southern California</span>
+      <div class="head">
+        <p class="eyebrow">Timeline</p>
+        <h2 id="tl-title">Season schedule</h2>
+        <p>All official deadlines are in Pacific Time. Switch to your own time zone to see when each session starts where you are.</p>
+      </div>
+      <div class="tz" role="group" aria-label="Time zone">
+        <span>Show times in:</span>
+        <button type="button" id="tz-pt" aria-pressed="true">Pacific Time</button>
+        <button type="button" id="tz-local" aria-pressed="false">My time zone</button>
+      </div>
+      <ol class="timeline" id="timeline-list"></ol>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    /* ===== Edit these values to update the site ===== */
-    const CONFIG = {
-      // Paste the expression-of-interest form URL here. While empty, buttons point to the contact section.
-      interestFormUrl: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=ybnMwJPWXUmEklE2uxlA1pq-hJheGnFJn2ljrnR-aCRUNjZOT0MwQVlEQURSUkU1NENVSjFWVjNYNy4u",
-      // Paste the livestream URL here once it exists.
-      livestreamUrl: "",
-    };
-    // Times are ISO strings in UTC; PT in Jan/Feb is UTC−8. "allDay" milestones have no specific time.
-    const MILESTONES = [
-      { id: "announce", date: "2026-11-02", allDay: true, title: "Competition announced", note: "Expression of interest opens for schools." },
-      { id: "register", start: "2027-01-14T07:59:00Z", title: "Registration & roster lock", note: "Schools confirm team rosters. 11:59 PM PT.", strip: ["Register by", "form"], key: true },
-      { id: "kickoff", start: "2027-01-26T02:00:00Z", title: "Kickoff & case launch", note: "Live on Zoom: intro to the dataset, the prompt and Q&A.", strip: ["Case launch", "zones"], key: true },
-      { id: "qa1", start: "2027-01-28T02:00:00Z", title: "Technical Q&A session 1", note: "Live on Zoom." },
-      { id: "qa2", start: "2027-01-28T20:00:00Z", title: "Technical Q&A session 2", note: "Live on Zoom." },
-      { id: "submit", start: "2027-02-08T07:59:00Z", title: "Submission deadline", note: "Live demo and GitHub repository lock. 11:59 PM PT.", strip: ["Submit by", "zones"], key: true },
-      { id: "finalists", date: "2027-02-13", allDay: true, title: "Finalists announced", note: "Top teams are notified." },
-      { id: "rehearsal", start: "2027-02-18T07:59:00Z", title: "Final GitHub upload for presentation", note: "For finalist teams. 11:59 PM PT." },
-      { id: "finals", start: "2027-02-20T17:00:00Z", end: "2027-02-20T19:00:00Z", title: "Live finals", note: "Broadcast live on Zoom.", strip: ["Live finals", "Zoom"], key: true },
-    ];
-    /* ================================================ */
+  <section class="block" id="judging" aria-labelledby="judging-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Judging</p>
+        <h2 id="judging-title">What the judges look for</h2>
+      </div>
+      <div class="judging">
+        <ul class="criteria">
+          <li><h3>Actionability</h3><p>Does the tool lead straight to a coaching decision during the game?</p></li>
+          <li><h3>Clarity</h3><p>Can a coach read it at a glance and understand it immediately?</p></li>
+          <li><h3>Feasibility</h3><p>Would it hold up under live, high-speed game conditions?</p></li>
+          <li><h3>Defend &amp; explain</h3><p>Can your team explain the logic, the code and the choices behind it?</p></li>
+        </ul>
+        <aside class="panel">
+          <h3>Who's judging</h3>
+          <p><strong>An independent panel of experienced industry professionals</strong>, selected by the Faculty Co-Directors.</p>
+          <p><strong>AI tools are welcome.</strong> Teams are judged on the quality of what they build and how well they defend their analytical logic.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
-    const PT = "America/Los_Angeles";
-    let useLocal = false;
-    const now = () => new Date();
-    const startOf = (m) => m.start ? new Date(m.start) : new Date(m.date + "T12:00:00-08:00");
-    const endOf = (m) => m.end ? new Date(m.end) : m.allDay ? new Date(m.date + "T23:59:59-08:00") : startOf(m);
-    const tz = () => useLocal ? undefined : PT;
-    const fmtDate = (d, opts) => new Intl.DateTimeFormat("en-US", { timeZone: tz(), ...opts }).format(d);
-    const fmtDay = (m) => m.allDay
-      ? new Intl.DateTimeFormat("en-US", { timeZone: PT, month: "short", day: "numeric" }).format(startOf(m))
-      : fmtDate(startOf(m), { month: "short", day: "numeric" });
-    function fmtTime(m) {
-      if (m.allDay) return "";
-      const t = (d) => fmtDate(d, { hour: "numeric", minute: "2-digit" });
-      const zone = fmtDate(startOf(m), { timeZoneName: "short" }).split(" ").pop();
-      return (m.end ? t(startOf(m)) + "–" + t(endOf(m)) : t(startOf(m))) + " " + zone;
+  <section class="block" id="organizers" aria-labelledby="org-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">The team</p>
+        <h2 id="org-title">Organized by</h2>
+      </div>
+      <div class="orgby">
+        <div>
+          <h3>Faculty Co-Directors</h3>
+          <ul class="people">
+            <li><span class="nm">Dr. Milan Miric</span><span class="rl">USC Marshall School of Business</span></li>
+            <li><span class="nm">Dr. Lorena Martin</span><span class="rl">Director, Trojans Sports Research Lab</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Supporting Organizations</h3>
+          <ul class="partners">
+            <li><a href="https://www.marshall.usc.edu/programs/graduate-programs/specialized-masters/ms-business-analytics" target="_blank" rel="noopener" aria-label="USC Marshall MS in Business Analytics"><img src="assets/logo-msba.jpg" alt="USC Marshall MS in Business Analytics logo" width="320" height="320"></a></li>
+            <li><a href="https://www.trojanssportsresearchlab.com" target="_blank" rel="noopener" aria-label="Trojans Sports Research Lab"><img src="assets/logo-trojans.jpg" alt="Trojans Sports Research Lab logo" width="320" height="320"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Questions</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Who can compete?</summary><div class="a"><p>Graduate and undergraduate students in business analytics, data science, sports analytics and MBA programs, from universities anywhere in the world.</p></div></details>
+        <details><summary>How do students sign up?</summary><div class="a"><p>Schools register, not individual students. Your program submits an expression of interest, and organizers follow up with registration links so school leads can confirm rosters by January 13, 2027.</p><p>If you're a student, request your program director or analytics program director to nominate you.</p></div></details>
+        <details><summary>How big are teams, and how many can a school send?</summary><div class="a"><p>Teams have 4 to 5 students. Each school may nominate up to 2 teams.</p></div></details>
+        <details><summary>Does it cost anything? Do we need to travel?</summary><div class="a"><p>No and no. Participation is free and the whole competition, including the finals, is virtual.</p></div></details>
+        <details><summary>What exactly do we submit?</summary><div class="a"><p>A GitHub repository containing all your code and pipelines, and a link to a live demo hosted on GitHub, such as GitHub Pages or a GitHub-deployed web app. The tool should be self-explanatory and let judges choose a game, time or situation.</p></div></details>
+        <details><summary>Can we keep working after the deadline?</summary><div class="a"><p>No. Repositories lock at 11:59 PM PT on February 7, 2027. No edits are allowed between the deadline and the final presentations.</p></div></details>
+        <details><summary>Can we use outside data or AI tools?</summary><div class="a"><p>Only the competition dataset may be used. AI tools are allowed and encouraged, but be ready to explain and defend every analytical choice.</p></div></details>
+        <details><summary>Where can we ask technical questions?</summary><div class="a"><p>At the kickoff on January 25 and at two live Q&amp;A sessions on Zoom on January 27 and 28. For anything else, email the organizers.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div>
+        <h2 id="cta-title">Submit your expression of interest</h2>
+        <p>Schools: submit your expression of interest by January 13, 2027.</p>
+        <p class="mail">Questions? Email the organizers: <a href="mailto:SportsAnalyticsCaseComp@marshall.usc.edu"><code>SportsAnalyticsCaseComp@marshall.usc.edu</code></a> <button type="button" id="copy-mail">Copy</button></p>
+      </div>
+      <a class="btn btn-red" id="cta-form" href="#contact">Register interest</a>
+    </div>
+  </section>
+</main>
+
+<footer class="base">
+  <div class="wrap">
+    <span>Jointly organized by the USC Marshall MS in Business Analytics &amp; the Trojans Sports Research Lab</span>
+    <span>© 2026 University of Southern California</span>
+  </div>
+</footer>
+
+<script>
+/* ===== Edit these values to update the site ===== */
+const CONFIG = {
+  // Paste the expression-of-interest form URL here. While empty, buttons point to the contact section.
+  interestFormUrl: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=ybnMwJPWXUmEklE2uxlA1pq-hJheGnFJn2ljrnR-aCRUNjZOT0MwQVlEQURSUkU1NENVSjFWVjNYNy4u",
+  // Paste the livestream URL here once it exists.
+  livestreamUrl: "",
+};
+// Times are ISO strings in UTC; PT in Jan/Feb is UTC−8. "allDay" milestones have no specific time.
+const MILESTONES = [
+  { id: "announce", date: "2026-11-02", allDay: true, title: "Competition announced", note: "Expression of interest opens for schools." },
+  { id: "register", start: "2027-01-14T07:59:00Z", title: "Registration & roster lock", note: "Schools confirm team rosters. 11:59 PM PT.", strip: ["Register by", "form"], key: true },
+  { id: "kickoff", start: "2027-01-26T02:00:00Z", title: "Kickoff & case launch", note: "Live on Zoom: intro to the dataset, the prompt and Q&A.", strip: ["Case launch", "zones"], key: true },
+  { id: "qa1", start: "2027-01-28T02:00:00Z", title: "Technical Q&A session 1", note: "Live on Zoom." },
+  { id: "qa2", start: "2027-01-28T20:00:00Z", title: "Technical Q&A session 2", note: "Live on Zoom." },
+  { id: "submit", start: "2027-02-08T07:59:00Z", title: "Submission deadline", note: "Live demo and GitHub repository lock. 11:59 PM PT.", strip: ["Submit by", "zones"], key: true },
+  { id: "finalists", date: "2027-02-13", allDay: true, title: "Finalists announced", note: "Top teams are notified." },
+  { id: "rehearsal", start: "2027-02-18T07:59:00Z", title: "Final GitHub upload for presentation", note: "For finalist teams. 11:59 PM PT." },
+  { id: "finals", start: "2027-02-20T17:00:00Z", end: "2027-02-20T19:00:00Z", title: "Live finals", note: "Broadcast live on Zoom.", strip: ["Live finals", "Zoom"], key: true },
+];
+/* ================================================ */
+
+const PT = "America/Los_Angeles";
+let useLocal = false;
+const now = () => new Date();
+const startOf = (m) => m.start ? new Date(m.start) : new Date(m.date + "T12:00:00-08:00");
+const endOf = (m) => m.end ? new Date(m.end) : m.allDay ? new Date(m.date + "T23:59:59-08:00") : startOf(m);
+const tz = () => useLocal ? undefined : PT;
+const fmtDate = (d, opts) => new Intl.DateTimeFormat("en-US", { timeZone: tz(), ...opts }).format(d);
+const fmtDay = (m) => m.allDay
+  ? new Intl.DateTimeFormat("en-US", { timeZone: PT, month: "short", day: "numeric" }).format(startOf(m))
+  : fmtDate(startOf(m), { month: "short", day: "numeric" });
+function fmtTime(m) {
+  if (m.allDay) return "";
+  const t = (d) => fmtDate(d, { hour: "numeric", minute: "2-digit" });
+  const zone = fmtDate(startOf(m), { timeZoneName: "short" }).split(" ").pop();
+  return (m.end ? t(startOf(m)) + "–" + t(endOf(m)) : t(startOf(m))) + " " + zone;
+}
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function renderStrip() {
+  const ol = document.getElementById("strip"); ol.replaceChildren();
+  const at = (d, zone, label) => new Intl.DateTimeFormat("en-US", { timeZone: zone, hour: "numeric", minute: "2-digit" }).format(d) + " " + label;
+  const dayIn = (d, zone) => new Intl.DateTimeFormat("en-US", { timeZone: zone, month: "short", day: "numeric" }).format(d);
+  MILESTONES.filter((m) => m.strip).forEach((m) => {
+    const li = el("li", m.id === "finals" ? "final" : "");
+    if (endOf(m) < now()) li.classList.add("past");
+    const d = startOf(m);
+    const date = new Intl.DateTimeFormat("en-US", { timeZone: PT, month: "short", day: "numeric", year: "numeric" }).format(d).toUpperCase();
+    const sub = el("span", "s");
+    const kind = m.strip[1];
+    if (kind === "form") {
+      sub.append(at(d, PT, "PT"), document.createElement("br"));
+      const a = el("a", null, "Register here");
+      a.href = CONFIG.interestFormUrl || "#contact";
+      if (CONFIG.interestFormUrl) { a.target = "_blank"; a.rel = "noopener"; }
+      sub.append(a);
+    } else if (kind === "zones") {
+      const gmtDay = dayIn(d, "UTC") !== dayIn(d, PT) ? " (" + dayIn(d, "UTC") + ")" : "";
+      sub.append(at(d, PT, "PT") + " · " + at(d, "America/New_York", "ET"), document.createElement("br"), at(d, "UTC", "GMT") + gmtDay);
+    } else {
+      sub.textContent = kind;
     }
-    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+    li.append(el("span", "eyebrow", m.strip[0]), el("span", "d", date), sub);
+    ol.append(li);
+  });
+}
 
-    function renderStrip() {
-      const ol = document.getElementById("strip"); ol.replaceChildren();
-      const at = (d, zone, label) => new Intl.DateTimeFormat("en-US", { timeZone: zone, hour: "numeric", minute: "2-digit" }).format(d) + " " + label;
-      const dayIn = (d, zone) => new Intl.DateTimeFormat("en-US", { timeZone: zone, month: "short", day: "numeric" }).format(d);
-      MILESTONES.filter((m) => m.strip).forEach((m) => {
-        const li = el("li", m.id === "finals" ? "final" : "");
-        if (endOf(m) < now()) li.classList.add("past");
-        const d = startOf(m);
-        const date = new Intl.DateTimeFormat("en-US", { timeZone: PT, month: "short", day: "numeric", year: "numeric" }).format(d).toUpperCase();
-        const sub = el("span", "s");
-        const kind = m.strip[1];
-        if (kind === "form") {
-          sub.append(at(d, PT, "PT"), document.createElement("br"));
-          const a = el("a", null, "Register here");
-          a.href = CONFIG.interestFormUrl || "#contact";
-          if (CONFIG.interestFormUrl) { a.target = "_blank"; a.rel = "noopener"; }
-          sub.append(a);
-        } else if (kind === "zones") {
-          const gmtDay = dayIn(d, "UTC") !== dayIn(d, PT) ? " (" + dayIn(d, "UTC") + ")" : "";
-          sub.append(at(d, PT, "PT") + " · " + at(d, "America/New_York", "ET"), document.createElement("br"), at(d, "UTC", "GMT") + gmtDay);
-        } else {
-          sub.textContent = kind;
-        }
-        li.append(el("span", "eyebrow", m.strip[0]), el("span", "d", date), sub);
-        ol.append(li);
-      });
-    }
+function renderTimeline() {
+  const ol = document.getElementById("timeline-list"); ol.replaceChildren();
+  const upcoming = MILESTONES.find((m) => endOf(m) >= now());
+  MILESTONES.forEach((m) => {
+    const li = el("li", m.key ? "key" : "");
+    if (endOf(m) < now()) li.classList.add("done");
+    const what = el("div", "what", m.title);
+    if (m === upcoming) { li.classList.add("upnext"); what.append(el("span", "pill", "Up next")); }
+    what.append(el("small", null, m.note));
+    const year = new Intl.DateTimeFormat("en-US", { timeZone: PT, year: "numeric" }).format(startOf(m));
+    li.append(el("div", "when", fmtDay(m) + " " + year), what, el("div", "time", fmtTime(m)));
+    ol.append(li);
+  });
+}
 
-    function renderTimeline() {
-      const ol = document.getElementById("timeline-list"); ol.replaceChildren();
-      const upcoming = MILESTONES.find((m) => endOf(m) >= now());
-      MILESTONES.forEach((m) => {
-        const li = el("li", m.key ? "key" : "");
-        if (endOf(m) < now()) li.classList.add("done");
-        const what = el("div", "what", m.title);
-        if (m === upcoming) { li.classList.add("upnext"); what.append(el("span", "pill", "Up next")); }
-        what.append(el("small", null, m.note));
-        const year = new Intl.DateTimeFormat("en-US", { timeZone: PT, year: "numeric" }).format(startOf(m));
-        li.append(el("div", "when", fmtDay(m) + " " + year), what, el("div", "time", fmtTime(m)));
-        ol.append(li);
-      });
-    }
+function renderNext() {
+  const p = document.getElementById("next-up");
+  const m = MILESTONES.find((x) => x.key && endOf(x) >= now());
+  if (!m) { p.replaceChildren(el("strong", null, "Thanks to every team that competed in 2027.")); return; }
+  const ms = startOf(m) - now();
+  const live = ms <= 0;
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60;
+  p.replaceChildren(el("span", null, "Next up:"), el("strong", null, m.title + " · " + fmtDay(m)),
+    el("span", "count", live ? "Happening now" : `${d}d ${String(h).padStart(2, "0")}h ${String(mi).padStart(2, "0")}m`));
+}
 
-    function renderNext() {
-      const p = document.getElementById("next-up");
-      const m = MILESTONES.find((x) => x.key && endOf(x) >= now());
-      if (!m) { p.replaceChildren(el("strong", null, "Thanks to every team that competed in 2027.")); return; }
-      const ms = startOf(m) - now();
-      const live = ms <= 0;
-      const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60;
-      p.replaceChildren(el("span", null, "Next up:"), el("strong", null, m.title + " · " + fmtDay(m)),
-        el("span", "count", live ? "Happening now" : `${d}d ${String(h).padStart(2, "0")}h ${String(mi).padStart(2, "0")}m`));
-    }
+function wireCtas() {
+  const regClosed = now() > endOf(MILESTONES.find((m) => m.id === "register"));
+  const primary = document.getElementById("primary-cta");
+  const form = document.getElementById("cta-form");
+  if (regClosed && CONFIG.livestreamUrl) {
+    primary.textContent = "Watch the live finals"; primary.href = CONFIG.livestreamUrl;
+  } else if (regClosed) {
+    primary.textContent = "See the schedule"; primary.href = "#timeline";
+  } else if (CONFIG.interestFormUrl) {
+    primary.href = CONFIG.interestFormUrl;
+  }
+  if (CONFIG.interestFormUrl && !regClosed) { form.href = CONFIG.interestFormUrl; } else { form.hidden = true; }
+  [primary, form].forEach((a) => { if (/^https?:/.test(a.href) && !a.href.startsWith(location.origin)) { a.target = "_blank"; a.rel = "noopener"; } });
+}
 
-    function wireCtas() {
-      const regClosed = now() > endOf(MILESTONES.find((m) => m.id === "register"));
-      const primary = document.getElementById("primary-cta");
-      const form = document.getElementById("cta-form");
-      if (regClosed && CONFIG.livestreamUrl) {
-        primary.textContent = "Watch the live finals"; primary.href = CONFIG.livestreamUrl;
-      } else if (regClosed) {
-        primary.textContent = "See the schedule"; primary.href = "#timeline";
-      } else if (CONFIG.interestFormUrl) {
-        primary.href = CONFIG.interestFormUrl;
-      }
-      if (CONFIG.interestFormUrl && !regClosed) { form.href = CONFIG.interestFormUrl; } else { form.hidden = true; }
-      [primary, form].forEach((a) => { if (/^https?:/.test(a.href) && !a.href.startsWith(location.origin)) { a.target = "_blank"; a.rel = "noopener"; } });
-    }
+function setZone(local) {
+  useLocal = local;
+  document.getElementById("tz-pt").setAttribute("aria-pressed", String(!local));
+  document.getElementById("tz-local").setAttribute("aria-pressed", String(local));
+  try { localStorage.setItem("tzLocal", local ? "1" : "0"); } catch (e) {}
+  renderStrip(); renderTimeline(); renderNext();
+}
 
-    function setZone(local) {
-      useLocal = local;
-      document.getElementById("tz-pt").setAttribute("aria-pressed", String(!local));
-      document.getElementById("tz-local").setAttribute("aria-pressed", String(local));
-      try { localStorage.setItem("tzLocal", local ? "1" : "0"); } catch (e) { }
-      renderStrip(); renderTimeline(); renderNext();
-    }
+document.getElementById("tz-pt").addEventListener("click", () => setZone(false));
+document.getElementById("tz-local").addEventListener("click", () => setZone(true));
+document.getElementById("copy-mail").addEventListener("click", async (e) => {
+  const btn = e.currentTarget, addr = "SportsAnalyticsCaseComp@marshall.usc.edu";
+  try { await navigator.clipboard.writeText(addr); btn.textContent = "Copied"; }
+  catch (err) { const r = document.createRange(); r.selectNodeContents(btn.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+  setTimeout(() => (btn.textContent = "Copy"), 2000);
+});
 
-    document.getElementById("tz-pt").addEventListener("click", () => setZone(false));
-    document.getElementById("tz-local").addEventListener("click", () => setZone(true));
-    document.getElementById("copy-mail").addEventListener("click", async (e) => {
-      const btn = e.currentTarget, addr = "SportsAnalyticsCaseComp@marshall.usc.edu";
-      try { await navigator.clipboard.writeText(addr); btn.textContent = "Copied"; }
-      catch (err) { const r = document.createRange(); r.selectNodeContents(btn.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
-      setTimeout(() => (btn.textContent = "Copy"), 2000);
-    });
-
-    let saved = false; try { saved = localStorage.getItem("tzLocal") === "1"; } catch (e) { }
-    wireCtas(); setZone(saved);
-    setInterval(renderNext, 30000);
-
-    function initTheme() {
-      const toggle = document.getElementById("theme-toggle");
-      const label = toggle ? toggle.querySelector(".theme-text") : null;
-      let current = localStorage.getItem("theme") || "light";
-
-      function applyTheme(theme) {
-        document.documentElement.setAttribute("data-theme", theme);
-        try { localStorage.setItem("theme", theme); } catch (e) { }
-        if (toggle) {
-          toggle.setAttribute("aria-label", theme === "dark" ? "Switch to day mode" : "Switch to night mode");
-        }
-        if (label) {
-          label.textContent = theme === "dark" ? "Night" : "Day";
-        }
-      }
-
-      applyTheme(current);
-
-      if (toggle) {
-        toggle.addEventListener("click", () => {
-          current = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-          applyTheme(current);
-        });
-      }
-    }
-    initTheme();
-  </script>
+let saved = false; try { saved = localStorage.getItem("tzLocal") === "1"; } catch (e) {}
+wireCtas(); setZone(saved);
+setInterval(renderNext, 30000);
+</script>
 
 </body>
-
 </html>
