@@ -11,7 +11,7 @@ The whole site is one file, `index.html`. Images live in `assets/`. GitHub Pages
 Near the bottom of `index.html` is a block marked **Edit these values to update the site**:
 
 - **`interestFormUrl`:** the expression-of-interest form link. While it's empty, the buttons scroll to the contact section.
-- **`livestreamUrl`:** the YouTube finals link. After registration closes, the main button switches to "Watch the live finals" once this is set.
+- **`livestreamUrl`:** the livestream finals link. After registration closes, the main button switches to "Watch the live finals" once this is set.
 - **`MILESTONES`:** every date on the page. The key-date strip, the full timeline, the "Up next" highlight and the countdown are all built from this list. Times are in UTC (Pacific Time in January and February is UTC−8).
 
 Eligibility, judging and FAQ text is plain HTML higher up in the same file.
