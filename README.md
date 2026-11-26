@@ -1,6 +1,6 @@
-# 2027 MSBA Sports Data Analytics Competition
+# 2027 USC Sports Data Analytics Competition
 
-Public website for the inaugural MSBA Sports Data Analytics Competition, hosted by the USC Marshall School of Business.
+Public website for the inaugural USC Sports Data Analytics Competition, hosted by the USC Marshall School of Business and the Trojans Sports Research Lab.
 
 **Live site:** https://usc-student-outcomes-and-trajectories.github.io/sports-data-analytics-competition/
 
